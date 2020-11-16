@@ -39,3 +39,21 @@ summary(suits_16$SQ1)
 summary(suits_16$SQ2)
 # サンプル数
 nrow(suits_16)
+
+# 2018年の結果を見ていく
+#変数と質問項目を一致させるために整理する
+item_suits18 <- read_excel("researchData/5-3-18.xlsx",sheet = 1)
+# 空白を削除する
+item_suits18_all <- item_suits18 %>%
+  drop_na(Question)
+# 見てみるけど
+ncol(suits_18)
+nrow(item_suits18_all)
+# 書き出し処理
+readr::write_excel_csv(item_suits18_all, "item_suits_all.csv")
+
+# 欠損値の確認
+library(skimr)
+suits_18 %>%
+  skimr::skim()
+# 欠損値はないことがわかる
