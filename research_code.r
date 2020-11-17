@@ -107,3 +107,4 @@ plot(g_gender_17)
 suits_gender_compare <- gridExtra::grid.arrange(g_gender_16,g_gender_17,g)
 ggsave(file = "紳士服_男女比較.png",plot = suits_gender_compare,
        dpi = 100, width = 6.4, height = 4.8)
+       
