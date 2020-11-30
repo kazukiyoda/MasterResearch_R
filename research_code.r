@@ -48,13 +48,27 @@ nrow(suits_16)
 #変数と質問項目を一致させるために整理する
 item_suits18 <- read_excel("researchData/5-3-18.xlsx",sheet = 1)
 # 空白を削除する
+## Quesion列で空白が存在してる行を消していく
 item_suits18_all <- item_suits18 %>%
   drop_na(Question)
 # 見てみるけど
 ncol(suits_18)
 nrow(item_suits18_all)
 # 書き出し処理
-readr::write_excel_csv(item_suits18_all, "item_suits_all.csv")
+readr::write_excel_csv(item_suits18_all, "item_suits18_all.csv")
+
+## 2017年と2016年に対しも同様の処理を行うことで質問リストを比較する
+### 2017年
+item_suits17 <- read_excel("researchData/5-3-17.xlsx",sheet = 1)
+item_suits17_all <- item_suits17 %>%
+  drop_na(Question)
+item_suits16 <- read_excel("researchData/5-3-16.xlsx",sheet = 1)
+item_suits16_all <- item_suits16 %>%
+  drop_na(Question)
+readr::write_excel_csv(item_suits17, "item_suits17.csv")
+readr::write_excel_csv(item_suits17_all, "item_suits17_all.csv")
+readr::write_excel_csv(item_suits16, "item_suits16.csv")
+readr::write_excel_csv(item_suits16_all, "item_suits16_all.csv")
 
 # summaryの上位互換でいろんな要素を同時に出力できる
 suits_18 %>%
@@ -108,3 +122,28 @@ suits_gender_compare <- gridExtra::grid.arrange(g_gender_16,g_gender_17,g)
 ggsave(file = "紳士服_男女比較.png",plot = suits_gender_compare,
        dpi = 100, width = 6.4, height = 4.8)
        
+## スクリーニングだけでアンケート内容を見てみる
+library(stringr)
+#item_suits18_screening <- item_suits18 %>%
+#  filter(str_detect(Question,"SQ"))
+#item_suits17_screening <- item_suits17 %>%
+#  filter(str_detect(Question,"SQ"))
+#item_suits16_screening <- item_suits16 %>%
+#  filter(str_detect(Question,"SQ"))
+## 上の場合選択肢が消されてしまう
+
+item_suits18_screening <- item_suits18 %>%
+  select(Question,CtgNo,Title) %>%
+  head(224)
+
+item_suits17_screening <- item_suits17 %>%
+  select(Question,CtgNo,Title) %>%
+  head(224)
+
+item_suits16_screening <- item_suits16 %>%
+  select(Question,CtgNo,Title) %>%
+  head(220)
+## 書き出し
+readr::write_excel_csv(item_suits18_screening, "item_suits18_screening.csv")
+readr::write_excel_csv(item_suits17_screening, "item_suits17_screening.csv")
+readr::write_excel_csv(item_suits16_screening, "item_suits16_screening.csv")
