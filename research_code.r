@@ -1,4 +1,3 @@
-# 2020/11/06
 library(tidyverse)
 library(readxl)
 library(skimr)
@@ -12,7 +11,7 @@ suits_17 <- read_excel("researchData/5-3-17.xlsx",sheet = 2)
 
 suits_18 <- read_excel("researchData/5-3-18.xlsx",sheet = 2)
 
-年度によってサンプル数が違うことがわかる
+# 年度によってサンプル数が違うことがわかる
 
 # SQ1:性別 1がmen
 # SQ2:年齢
@@ -147,3 +146,53 @@ item_suits16_screening <- item_suits16 %>%
 readr::write_excel_csv(item_suits18_screening, "item_suits18_screening.csv")
 readr::write_excel_csv(item_suits17_screening, "item_suits17_screening.csv")
 readr::write_excel_csv(item_suits16_screening, "item_suits16_screening.csv")
+
+# 本項目の内容を見ていく
+
+#item_suits18_survey
+item_suit18_row <- nrow(item_suits18)
+item_suit18_row #データフレームの行数
+
+# 本調査が始まる行番号の抽出
+item_suits18_survey_begin <- match("Q1",item_suits18$Question) #QuestionがQ1の行を特定
+
+# 選択肢を全部含む場合
+item_suits18_survey <- item_suits18 %>%
+  select(Question,CtgNo,Title) %>%
+  slice(item_suits18_survey_begin:item_suit18_row)
+
+readr::write_excel_csv(item_suits18_survey, "item_suits18_survey.csv")
+
+# item_suirs17_survey
+item_suit17_row <- nrow(item_suits17)
+item_suit17_row #データフレームの行数
+
+# 本調査が始まる行番号の抽出
+item_suits17_survey_begin <- match("Q1",item_suits17$Question) #QuestionがQ1の行を特定
+
+item_suits17_survey <- item_suits17 %>%
+  select(Question,CtgNo,Title) %>%
+  slice(item_suits17_survey_begin:item_suit17_row)
+
+readr::write_excel_csv(item_suits17_survey, "item_suits17_survey.csv")
+
+# item_suirs16_survey
+item_suit16_row <- nrow(item_suits16)
+item_suit16_row #データフレームの行数
+
+# 本調査が始まる行番号の抽出
+item_suits16_survey_begin <- match("Q1",item_suits16$Question) #QuestionがQ1の行を特定
+
+item_suits16_survey <- item_suits16 %>%
+  select(Question,CtgNo,Title) %>%
+  slice(item_suits16_survey_begin:item_suit16_row)
+
+readr::write_excel_csv(item_suits16_survey, "item_suits16_survey.csv")
+
+# 回答選択肢(QuestionがNAとなる選択肢)を全部消してみる
+item_suits18_survey_simple <- item_suits18 %>%
+  select(Question,CtgNo,Title) %>%
+  slice(item_suits18_survey_begin:item_suit18_row) %>%
+  drop_na(Question)
+
+readr::write_excel_csv(item_suits18_survey_simple, "item_suits18_survey_simple.csv")
