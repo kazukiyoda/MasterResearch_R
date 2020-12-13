@@ -161,7 +161,7 @@ item_suits18_survey <- item_suits18 %>%
   select(Question,CtgNo,Title) %>%
   slice(item_suits18_survey_begin:item_suit18_row)
 
-readr::write_excel_csv(item_suits18_survey, "item_suits18_survey.csv")
+readr::write_excel_csv(item_suits18_survey, "output/item_suits18_survey.csv")
 
 # item_suirs17_survey
 item_suit17_row <- nrow(item_suits17)
@@ -195,4 +195,34 @@ item_suits18_survey_simple <- item_suits18 %>%
   slice(item_suits18_survey_begin:item_suit18_row) %>%
   drop_na(Question)
 
-readr::write_excel_csv(item_suits18_survey_simple, "item_suits18_survey_simple.csv")
+readr::write_excel_csv(item_suits18_survey_simple, "output/item_suits18_survey_simple.csv")
+
+# 2017年も同様に処理
+item_suits17_survey_simple <- item_suits17 %>%
+  select(Question,CtgNo,Title) %>%
+  slice(item_suits17_survey_begin:item_suit17_row) %>%
+  drop_na(Question)
+
+readr::write_excel_csv(item_suits17_survey_simple, "output/item_suits17_survey_simple.csv")
+
+# 2016年も同様に処理
+item_suits16_survey_simple <- item_suits16 %>%
+  select(Question,CtgNo,Title) %>%
+  slice(item_suits16_survey_begin:item_suit16_row) %>%
+  drop_na(Question)
+
+readr::write_excel_csv(item_suits16_survey_simple, "output/item_suits16_survey_simple.csv")
+
+# 2018年はSQ7が企業名である
+# 企業ごとの年収の分布
+
+## 年収リストを作成する
+item_suits18 %>%
+  filter(SQ7 == 1) %>%
+  select(SAMPLEID,Q36) %>%
+  
+suits_18 %>%
+  filter(SQ7 == 1) %>%
+  select(SAMPLEID,Q36) %>%
+  ggplot(aes(x = Q36)) + labs(x = "年収", title = "企業1の年収分布") 
+  geom_histogram()
