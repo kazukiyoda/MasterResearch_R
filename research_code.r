@@ -219,10 +219,12 @@ readr::write_excel_csv(item_suits16_survey_simple, "output/item_suits16_survey_s
 ## 年収リストを作成する
 item_suits18 %>%
   filter(SQ7 == 1) %>%
-  select(SAMPLEID,Q36) %>%
+  select(SAMPLEID,Q36)
   
 suits_18 %>%
   filter(SQ7 == 1) %>%
   select(SAMPLEID,Q36) %>%
   ggplot(aes(x = Q36)) + labs(x = "年収", title = "企業1の年収分布") 
   geom_histogram()
+
+# クロス集計表を作成する
