@@ -45,7 +45,9 @@ Q2_newlabel
 Q2 <- suits_18 %>%
   select(Q2_1:Q2_38)　%>%
   setNames(Q2_newlabel)
-Q2
 
+ggplot() +
+  geom_bar(data = Q2, mapping = aes(x = `Q2_1 品質の良さ（素材や耐久性など）`)) +
+  theme_bw()
 
 
