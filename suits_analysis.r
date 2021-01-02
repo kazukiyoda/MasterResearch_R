@@ -78,6 +78,7 @@ save_place <- gsub(" ","",save_place)
 for (i in 1:38){
   p <- ggplot() +
     geom_bar(data = Q2, mapping = aes_string(x = Q2_label_vector[i])) +
+    scale_x_continuous(breaks = seq(0,10,1)) +
     theme_bw()
   ggsave(file = save_place[i],plot = p,
          dpi = 100, width = 6.4, height = 4.8)
