@@ -8,7 +8,7 @@ suits_18 <- read_excel("researchData/5-3-18.xlsx",sheet = 2)
 
 item_suits18 <- read_excel("researchData/5-3-18.xlsx",sheet = 1)
 
-# 具体的にQ2の項目を使用する
+# 1. 具体的にQ2の項目を使用する
 item_Q2_number <- item_suits18_all %>%
   filter(grepl("Q2_", Question)) %>%
   select(Question)
@@ -17,13 +17,13 @@ item_Q2 <- item_suits18_all %>%
   filter(grepl("Q2_", Question)) %>%
   select(Title)
 
-# Q2のみの表を作成しておく
+# 2. Q2のみの表を作成しておく
 Q2_newlabel <- paste(item_Q2_number$Question, item_Q2$Title)
 Q2 <- suits_18 %>%
   select(Q2_1:Q2_38)　%>%
   setNames(Q2_newlabel)
 
-# Q2系は38項目
+# 3. Q2系は38項目
 for (i in 1:38){
   if (i == 1){
     x <- c(item_Q2_number[i,1])
@@ -72,3 +72,4 @@ for (i in 1:38){
   ggsave(file = save_place[i],plot = p,
          dpi = 100, width = 6.4, height = 4.8)
 }
+
