@@ -129,3 +129,20 @@ g <- ggplot(df, aes(x = sample, y = weight, fill = sample))
 g <- g + geom_bar(stat = "identity")
 g <- g + scale_fill_nejm()
 plot(g)
+
+# 各アンケート項目の変数を見ることで，どんな回答法が見る
+suits_18 %>%
+  select(`SQ4[1]`:`SQ4[37]`) %>%
+  rowSums()
+
+suits_18 %>%
+  select(`SQ5[1]`:`SQ5[16]`) %>%
+  summary()
+
+suits_18 %>%
+  select(Q9_1:Q9_2) %>%
+  skimr::skim()
+
+suits_18 %>%
+  select(Q17_1:Q17_2) %>%
+  skimr::skim()
