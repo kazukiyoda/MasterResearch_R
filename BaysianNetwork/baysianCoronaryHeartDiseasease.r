@@ -30,7 +30,7 @@ tb.coro_01 <- tb.coronary %>%
 
 # ネットワーク学習
 # ブーストラップ
-str.coro = boot.strength(tb.coro_01, R = 200, algorithm = "hc",
+str.coro = boot.strength(tb.coro_01, R = 200, algorithm = "hc",s
                          algorithm.args = list(score = "bic-g"))
 
 avg.coro = averaged.network(str.coro)

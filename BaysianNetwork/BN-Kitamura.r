@@ -28,3 +28,20 @@ df_suits18_kitamura_model %>%
 write_csv(df_suits18_kitamura_model, "df_preKitmura_suits.csv")
 
 # また読み込む
+
+# ネットワーク学習
+str.suits18.kita = boot.strength(df_suits18_kitamura_model, R = 10,
+                                 algorithm = "hc",
+                                 algorithm.args = list(score = "bic-g"),
+                                 debug = TRUE)
+head(str.suits18.kita)
+plot(str.suits18.kita)
+
+avg.suits18.kita = averaged.network(str.suits18.kita)
+
+strength.plot(avg.suits18.kita, str.suits18.kita, shape = "ellipse")
+
+fitted.suits18.kita = bn.fit(avg.suits18.kita, df_suits18_kitamura_model)
+# DAGになってないのでもちろんのことエラー
+
+# ブラックリストとホワイトリストの作成
