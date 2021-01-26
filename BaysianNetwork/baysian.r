@@ -1,6 +1,8 @@
 # ベイジアンネットワーク
-library(bnlearn)
 library(tidyverse)
+library(bnlearn)
+library(gRain)
+
 
 # シンプルなデータに対して簡単な操作
 

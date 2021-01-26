@@ -136,7 +136,7 @@ suits_18 %>%
   rowSums()
 
 suits_18 %>%
-  select(`SQ5[1]`:`SQ5[16]`) %>%
+  select(Q36) %>%
   summary()
 
 suits_18 %>%
@@ -144,5 +144,23 @@ suits_18 %>%
   skimr::skim()
 
 suits_18 %>%
-  select(Q17_1:Q17_2) %>%
-  skimr::skim()
+  select(Q32:Q33) %>%
+  filter(is.na(Q33)) %>%
+  arrange(Q32)
+
+# 世帯年収の分布
+Q36 <- suits_18 %>%
+  select(Q36)
+
+item_Q36 <- item_suits18 %>%
+  slice(1526:1539) %>%
+  select(CtgNo:Title)
+
+item_Q36_number <- item_Q36 %>%
+  select(CtgNo)
+
+ggplot(data = suits_18, mapping = aes(x = "Q36")) +
+  stat_count(width = 0.5) +
+  theme_bw()
+
+
